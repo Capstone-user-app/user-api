@@ -63,7 +63,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
 
-  /client/sales:
+  /sales:
     get:
       summary: Get all sales of a client
       operationId: getClientSales
@@ -79,7 +79,7 @@ paths:
                 items:
                   $ref: '#/components/schemas/Sale'
   
-  /client/sales/{saleId}:
+  /sales/{saleId}:
     get:
       summary: Get a client sale by id
       operationId: getClientSale
