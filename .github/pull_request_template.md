@@ -9,8 +9,7 @@ What are the changes?
 
 ## Checklist:
 
-- [ ] This PR sets the target branch to dev (or the correct target environment)
-- [ ] This PR has latest changes from dev branch (git merge origin/dev)
+- [ ] This PR has latest changes from main branch (git merge origin/main)
 - [ ] This PR was self-reviewed (Check your changes before asking for review)
 - [ ] This PR was documented (particularly in hard-to-understand areas)
 - [ ] This PR updates the technical documentation (under /docs)
