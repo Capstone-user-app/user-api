@@ -1,6 +1,6 @@
 service: ${file(./package.json):name}
 
-frameworkVersion: '2'
+frameworkVersion: '3'
 
 plugins:
   - serverless-offline
@@ -12,7 +12,6 @@ plugins:
 provider:
   name: aws
   runtime: nodejs14.x
-  lambdaHashingVersion: 20201221
   stage: ${opt:stage, 'dev'}
   region: sa-east-1
   memorySize: 1024

@@ -1,0 +1,328 @@
+openapi: '3.0.2'
+info:
+  title: API Title
+  version: '1.0'
+servers:
+  - url: https://bxe2hou6p1.execute-api.us-east-1.amazonaws.com/v1
+  - url: http://localhost:3000
+security: 
+  - bearerAuth: []
+paths:
+  /auth/login-client:
+    post:
+      summary: Login and gives access token to a client
+      operationId: loginClient
+      tags:
+        - Auth
+      requestBody:
+        description: The authentication data of the client
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginData'
+      responses:
+        '201':
+          description: A successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  
+  /auth/signup-client:
+    get:
+      summary: Get a client by id
+      operationId: getclient
+      tags:
+        - Auth
+      responses:
+        '200':
+          description: A successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Client'
+        '401':
+          description: The request has not been applied because it lacks valid authentication credentials for the target resource
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: The resource could not be found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /sales:
+    get:
+      summary: Get all sales of a client
+      operationId: getClientSales
+      tags:
+        - Client
+      responses:
+        '200':
+          description: A successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Sale'
+  
+  /sales/{saleId}:
+    get:
+      summary: Get a client sale by id
+      operationId: getClientSale
+      tags:
+        - Client
+      parameters:
+        - $ref: '#/components/parameters/saleId'
+      responses:
+        '200':
+          description: A successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Sale'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+components:
+  schemas:
+    Client:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+        name:
+          type: string
+          example: steve
+        lastname:
+          type: string
+          example: jobs
+    LoginData:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+          format: password
+    LoginResponse:
+      type: object
+      allOf:
+          - $ref: '#/components/schemas/Client'
+      properties:
+        token:
+          type: string
+          example: xxxxx.yyyyy.zzzzz
+    Sale:
+      type: object
+      properties:
+        packageId: 
+          type: string
+          example: d56ef70e-39f9-46c8-9abd-0008a11d4752
+        pinflagId: 
+          type: string
+          example: i2irei
+        saleSale: 
+          type: string
+          example: PINTEST#INT398694
+        packageStatus: 
+          type: number
+          example: 1
+        state: 
+          type: string
+          example: Metropolitana de Santiago
+        stateId: 
+          type: number
+          example: 13
+        city: 
+          type: string
+          example: Providencia
+        cityId: 
+          type: number
+          example: 13123
+        clickAndCollect: 
+          type: boolean
+        evidencePhoto: 
+          type: string
+          format: nullable
+        height: 
+          type: string
+          format: nullable
+        width: 
+          type: string
+          format: nullable
+        length: 
+          type: string
+          format: nullable
+        position: 
+          type: string
+          format: nullable
+        warehouseName: 
+          type: string
+          example: Pick Up Blue Express Tecnobox Ingles 2
+        warehouseId: 
+          type: number
+          example: 35
+        deliveryAddress: 
+          type: string
+          example: El gobernador 20 201
+        deliveryInstructions: 
+          type: string
+          format: nullable
+        clientEmail: 
+          type: string
+          example: ajavier.ruiz@pinflag.cl
+        clientName: 
+          type: string
+          example: Nicolas
+        clientLastName: 
+          type: string
+          example: Raimman
+        clientPhone: 
+          type: string
+          example: 959333263
+        products: 
+          type: array
+          items: 
+            type: object
+            properties: 
+              productName: 
+                type: string
+                example: Chaqueta Hombre Paicavi Therm-Pro Jacket Negro Lippi
+              sku: 
+                type: string
+                example: 1637202004113
+              price: 
+                type: number
+                example: 54990
+              weight: 
+                type: number
+                example: 1
+              photoUrl: 
+                type: array
+                items: 
+                  type: object
+                  properties: 
+                    URLIMAGEN: 
+                      type: string
+                      example: https://res-3.cloudinary.com/lippi-outdoor/image/upload/c_limit,dpr_2.0,f_auto,q_auto/v1/media/catalog/product/m/_/m_paicav_therm-pro_jacket._negro._1.jpg
+        packageHistory: 
+          type: array
+          items: 
+            type: object
+            properties: 
+              packageStatus: 
+                type: number
+                example: 1
+              date: 
+                type: string
+                example: 2022-05-14T03:43:50.280Z
+        trackingNumber: 
+          type: string
+          format: nullable
+        shippingCost: 
+          type: object
+          properties: 
+            price: 
+              type: string
+              format: nullable
+        cost: 
+          type: number
+          example: 54990
+
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+  parameters:
+    clientId:
+      name: clientId
+      in: path
+      description: The id of the client
+      required: true
+      schema:
+        type: number
+        example: 123e4567-e89b-12d3-a456-426614174000
+    saleId:
+      name: saleId
+      in: path
+      description: The id of the sale
+      required: true
+      schema:
+        type: number
+    tagId:
+      name: tagId
+      in: path
+      description: The id of the tag
+      required: true
+      schema:
+        type: number
+    pingId:
+      name: pingId
+      in: path
+      description: The id of the ping
+      required: true
+      schema:
+        type: number
+  responses:
+    NotFound:
+      description: The resource could not be found
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                example: The resource could not be found
+    Unauthorized:
+      description: The request has not been applied because it lacks valid authentication credentials for the target resource
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                example: You need to provide a client token
+    BadRequest:
+      description: The request has not been applied because it contains invalid syntax
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    InternalServerError:
+      description: The request has not been applied because an error occurred
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Forbidden:
+      description: The request has not been applied because it lacks valid authentication credentials for the target resource
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    bearerAuth:            # arbitrary name for the security scheme
+      type: http
+      scheme: bearer
+      bearerFormat: JWT 
