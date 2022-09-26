@@ -20,6 +20,17 @@ provider:
   apiGateway:
     shouldStartNameWithService: true
     minimumCompressionSize: 128 # compress responses over 128kb
+  httpApi:
+    cors: true
+    authorizers:
+      someJwtAuthorizer:
+        type: jwt
+        identitySource: $request.header.Authorization
+        issuerUrl: https://dev-nh2svhzc.us.auth0.com/
+        
+        audience:
+          - https://9shjd4c13a.execute-api.sa-east-1.amazonaws.com/dev
+    
 
 package:
   exclude:
