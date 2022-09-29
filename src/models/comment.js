@@ -1,13 +1,12 @@
-'use strict';
-module.exports = (sequelize, DataTypes) => {
+export const loadComment = (sequelize, DataTypes) => {
   const Comment = sequelize.define('Comment', {
-    user_id: DataTypes.UUID,
+    user_email: DataTypes.STRING,
     content: DataTypes.TEXT,
     publication_date: DataTypes.DATE,
     ticket_id: DataTypes.INTEGER
-  }, {});
-  Comment.associate = function(models) {
+  }, {})
+  Comment.associate = function associate (models) {
     this.belongsTo(models.Ticket)
-  };
-  return Comment;
-};
+  }
+  return Comment
+}

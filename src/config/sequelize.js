@@ -1,6 +1,9 @@
 import { Sequelize } from 'sequelize'
 import pg from 'pg'
 
+import { loadTicket } from '../models/ticket'
+import { loadComment } from '../models/comment'
+
 const DATABASE_URI = process.env.DATABASE_URI || ''
 const DATABASE_LOG = !process.env.DATABASE_LOG ? false : (process.env.DATABASE_LOG === 'true')
 
@@ -35,6 +38,19 @@ export const testDatabase = async () => {
   } catch (error) {
     console.log('Unable to connect to the database:', error)
   }
+}
+
+export const loadORM = async () => {
+  instanceSequelize = new Sequelize(DATABASE_URI, { ...commonOptions })
+  await instanceSequelize.authenticate()
+  const orm = {}
+
+  orm.Ticket = loadTicket(instanceSequelize, Sequelize.DataTypes)
+  orm.Comment = loadComment(instanceSequelize, Sequelize.DataTypes)
+  orm.Ticket.associate(orm)
+  orm.Comment.associate(orm)
+
+  return orm
 }
 
 export default instanceSequelize
