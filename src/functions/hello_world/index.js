@@ -5,7 +5,7 @@ export const handler = async (event) => {
     const body = JSON.parse(event.body)
     if (body?.error) throw new Error('Test error')
 
-    return succesfullResponse('Hello world!!')
+    return succesfullResponse('Hello world')
   } catch (error) {
     return errorResponse(error.message)
   }
