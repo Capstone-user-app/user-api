@@ -9,7 +9,11 @@
     "start": "npm run lint && nodemon --exec sls offline start",
     "test": "jest src/tests/ --detectOpenHandles --runInBand",
     "test:coverage": "jest src/tests/ --detectOpenHandles --runInBand --coverage",
-    "deploy": "sls deploy --verbose"
+    "deploy": "sls deploy --verbose",
+    "db:migrate": "sequelize db:migrate",
+    "db:migrate:undo": "sequelize db:migrate:undo",
+    "db:seed": "sequelize db:seed:all",
+    "db:seed:undo": "sequelize db:seed:undo"
   },
   "author": "Pinflag",
   "license": "ISC",
@@ -21,6 +25,7 @@
     "eslint-plugin-promise": "^5.1.1",
     "faker": "^5.5.3",
     "nodemon": "^2.0.15",
+    "sequelize-cli": "^6.5.1",
     "serverless-bundle": "^5.1.0",
     "serverless-dotenv": "^1.0.0-beta.2",
     "serverless-dotenv-plugin": "^3.10.0",

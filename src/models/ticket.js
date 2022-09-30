@@ -1,11 +1,11 @@
 export const loadTicket = (sequelize, DataTypes) => {
   const Ticket = sequelize.define('Ticket', {
-    user_email: DataTypes.STRING,
+    userEmail: DataTypes.STRING,
     title: DataTypes.STRING,
     description: DataTypes.TEXT,
-    publication_date: DataTypes.DATE,
+    publicationDate: DataTypes.DATE,
     status: DataTypes.SMALLINT
-  }, {})
+  }, { tableName: 'tickets' })
   Ticket.associate = function associate (models) {
     this.hasMany(models.Comment)
   }

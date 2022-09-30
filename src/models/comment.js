@@ -1,10 +1,10 @@
 export const loadComment = (sequelize, DataTypes) => {
   const Comment = sequelize.define('Comment', {
-    user_email: DataTypes.STRING,
+    userEmail: DataTypes.STRING,
     content: DataTypes.TEXT,
-    publication_date: DataTypes.DATE,
-    ticket_id: DataTypes.INTEGER
-  }, {})
+    publicationDate: DataTypes.DATE,
+    ticketId: DataTypes.INTEGER
+  }, { tableName: 'comments' })
   Comment.associate = function associate (models) {
     this.belongsTo(models.Ticket)
   }
