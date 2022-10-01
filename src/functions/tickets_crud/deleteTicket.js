@@ -7,7 +7,7 @@ export const deleteTicket = async (event, context, callback) => {
   const ticket = await orm.Ticket.findByPk(id)
 
   if (!ticket) {
-    return errorResponse('Ticket could not be found', 404);
+    return errorResponse('Ticket could not be found', 404)
   }
   try {
     await ticket.destroy()
