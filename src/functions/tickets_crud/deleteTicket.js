@@ -3,9 +3,9 @@ import { loadORM } from '../../config/sequelize'
 import { getUserEmail } from '../../utils/getUserEmail'
 
 export const deleteTicket = async (event, context, callback) => {
-  let userEmail = null;
+  let userEmail = null
   try {
-    userEmail = getUserEmail(event);
+    userEmail = getUserEmail(event)
   } catch (error) {
     return errorResponse('Unauthorized: email not present in JWT', 401)
   }
@@ -17,7 +17,7 @@ export const deleteTicket = async (event, context, callback) => {
   if (!ticket) {
     return errorResponse('Ticket could not be found', 404)
   }
-  if (ticket.userEmail != userEmail) {
+  if (ticket.userEmail !== userEmail) {
     return errorResponse('Forbidden', 403)
   }
   try {

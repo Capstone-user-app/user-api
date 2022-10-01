@@ -4,9 +4,9 @@ import { sanitizeBody } from '../../utils/sanitizeBody'
 import { getUserEmail } from '../../utils/getUserEmail'
 
 export const updateTicket = async (event) => {
-  let userEmail = null;
+  let userEmail = null
   try {
-    userEmail = getUserEmail(event);
+    userEmail = getUserEmail(event)
   } catch (error) {
     return errorResponse('Unauthorized: email not present in JWT', 401)
   }
@@ -20,7 +20,7 @@ export const updateTicket = async (event) => {
   if (!ticket) {
     return errorResponse('Ticket not found', 404)
   }
-  if (ticket.userEmail != userEmail) {
+  if (ticket.userEmail !== userEmail) {
     return errorResponse('Forbidden', 403)
   }
 

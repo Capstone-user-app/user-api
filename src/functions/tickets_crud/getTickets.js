@@ -3,9 +3,9 @@ import { loadORM } from '../../config/sequelize'
 import { getUserEmail } from '../../utils/getUserEmail'
 
 export const getTickets = async (event, context, callback) => {
-  let userEmail = null;
+  let userEmail = null
   try {
-    userEmail = getUserEmail(event);
+    userEmail = getUserEmail(event)
   } catch (error) {
     return errorResponse('Unauthorized: email not present in JWT', 401)
   }
