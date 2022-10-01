@@ -18,7 +18,6 @@ export const createTicket = async (event) => {
     const ticket = await orm.Ticket.create({ ...body, userEmail }, 201)
     return succesfullResponse(ticket)
   } catch (error) {
-    console.log(error)
     return errorResponse('Ticket could not be created', 400)
   }
 }
