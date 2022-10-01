@@ -15,8 +15,8 @@ export const createTicket = async (event) => {
   const orm = await loadORM()
 
   try {
-    const ticket = await orm.Ticket.create({ ...body, userEmail }, 201)
-    return succesfullResponse(ticket)
+    const ticket = await orm.Ticket.create({ ...body, userEmail })
+    return succesfullResponse(ticket, 201)
   } catch (error) {
     return errorResponse('Ticket could not be created', 400)
   }
