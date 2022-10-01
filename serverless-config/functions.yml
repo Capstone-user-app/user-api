@@ -4,11 +4,44 @@ HelloWorld:
   events: 
     - http:
         path: /hello-world
-        method: post
-Database:
-  description: Database test
-  handler: src/functions/database/index.handler
+        method: POST
+
+CreateTicket:
+  description: Create a Ticket
+
+  handler: src/functions/tickets_crud/createTicket.createTicket
   events:
     - http:
-        path: /database
-        method: get
+        path: /tickets
+        method: POST
+
+UpdateTicket:
+  description: Update a ticket
+  handler: src/functions/tickets_crud/updateTicket.updateTicket
+  events:
+    - http:
+        path: /tickets/{id}
+        method: PUT
+
+GetTickets:
+  description: List all tickets 
+  handler: src/functions/tickets_crud/getTickets.getTickets
+  events:
+    - http:
+        path: /tickets
+        method: GET
+
+ReadTicket:
+  description: Get a ticket with ticketID
+  handler: src/functions/tickets_crud/readTicket.readTicket
+  events:
+    - http:
+        path: /tickets/{id}
+        method: GET
+DeleteTicket:
+  description: Delete a ticket by id
+  handler: src/functions/tickets_crud/deleteTicket.deleteTicket
+  events:
+    - http:
+        path: /tickets/{id}
+        method: DELETE
