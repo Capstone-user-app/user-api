@@ -4,7 +4,7 @@ HelloWorld:
   events: 
     - http:
         path: /hello-world
-        method: post
+        method: POST
 
 CreateTicket:
   description: Create a Ticket
@@ -13,15 +13,15 @@ CreateTicket:
   events:
     - http:
         path: /tickets
-        method: post
+        method: POST
 
 UpdateTicket:
   description: Update a ticket
   handler: src/functions/tickets_crud/updateTicket.updateTicket
   events:
     - http:
-        path: /tickets
-        method: put # this should be put, but we don't have a db, so it's goona be get while
+        path: /tickets/{id}
+        method: PUT
 
 GetTickets:
   description: List all tickets 
@@ -29,19 +29,27 @@ GetTickets:
   events:
     - http:
         path: /tickets
-        method: get
+        method: GET
 
-# ReadTicket:
-#   description: Get a ticket with ticketID
-#   handler: src/functions/tickets_crud/readTicket.readTicket
-#   events:
-#     - http:
-#         path: /tickets/{id}
-#         method: get
+ReadTicket:
+  description: Get a ticket with ticketID
+  handler: src/functions/tickets_crud/readTicket.readTicket
+  events:
+    - http:
+        path: /tickets/{id}
+        method: GET
+DeleteTicket:
+  description: Delete a ticket by id
+  handler: src/functions/tickets_crud/deleteTicket.deleteTicket
+  events:
+    - http:
+        path: /tickets/{id}
+        method: DELETE
+        
 Database:
   description: Database test
   handler: src/functions/database/index.handler
   events:
     - http:
         path: /database
-        method: get
+        method: GET

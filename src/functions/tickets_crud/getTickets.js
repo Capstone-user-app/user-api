@@ -1,11 +1,8 @@
+import { succesfullResponse } from '../../utils/response_util'
+import { loadORM } from '../../config/sequelize'
 
 export const getTickets = async (event, context, callback) => {
-  const response = {
-    statusCode: 200,
-    headers: {
-      tickets: 'all ticket list',
-    },
-    body: JSON.stringify({ message: 'All tickets searched' }),
-  }
-  callback(null, response)
+  const orm = await loadORM()
+  const tickets = await orm.Ticket.findAll({ include: { model: orm.Comment } })
+  return succesfullResponse(tickets)
 }
