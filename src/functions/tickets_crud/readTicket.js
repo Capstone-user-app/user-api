@@ -8,5 +8,5 @@ export const readTicket = async (event, context, callback) => {
   if (ticket) {
     return succesfullResponse(ticket)
   }
-  errorResponse('Ticket not found', 404)
+  return errorResponse('Ticket not found', 404)
 }
