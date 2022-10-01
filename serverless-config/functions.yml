@@ -38,3 +38,10 @@ GetTickets:
 #     - http:
 #         path: /tickets/{id}
 #         method: get
+Database:
+  description: Database test
+  handler: src/functions/database/index.handler
+  events:
+    - http:
+        path: /database
+        method: get
