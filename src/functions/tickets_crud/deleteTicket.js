@@ -1,3 +1,5 @@
+/* eslint-disable max-statements */
+/* eslint-disable max-lines-per-function */
 import { succesfullResponse, errorResponse } from '../../utils/response_util'
 import { loadORM } from '../../config/sequelize'
 import { getUserEmail } from '../../utils/getUserEmail'
