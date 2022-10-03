@@ -10,6 +10,6 @@ export const getSales = async (event, context, callback) => {
     return errorResponse('Unauthorized: email not present in JWT', 401)
   }
 
-  const sales = salesMockData.filter((ticket) => ticket.clientEmail === userEmail)
+  const sales = salesMockData.filter((sale) => sale.clientEmail === userEmail)
   return succesfullResponse(sales)
 }
