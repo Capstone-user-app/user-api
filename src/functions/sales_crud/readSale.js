@@ -1,11 +1,10 @@
 /* eslint-disable max-statements */
 /* eslint-disable max-lines-per-function */
-
 import { succesfullResponse, errorResponse } from '../../utils/response_util'
-import { loadORM } from '../../config/sequelize'
 import { getUserEmail } from '../../utils/getUserEmail'
+import { salesMockData } from './salesMockData'
 
-export const readTicket = async (event, context, callback) => {
+export const readSale = async (event, context, callback) => {
   let userEmail = null
   try {
     userEmail = getUserEmail(event)
@@ -14,15 +13,14 @@ export const readTicket = async (event, context, callback) => {
   }
 
   const id = event.pathParameters.id
-  const orm = await loadORM()
-  const ticket = await orm.Ticket.findByPk(id, { include: { model: orm.Comment } })
+  const sale = salesMockData.filter((sale) => sale.packageId === id)[0]
 
-  if (!ticket) {
-    return errorResponse('Ticket not found', 404)
+  if (!sale) {
+    return errorResponse('Sale not found', 404)
   }
-  if (ticket.userEmail !== userEmail) {
+  if (sale.clientEmail !== userEmail) {
     return errorResponse('Forbidden', 403)
   }
 
-  return succesfullResponse(ticket)
+  return succesfullResponse(sale)
 }

@@ -45,3 +45,19 @@ DeleteTicket:
     - http:
         path: /tickets/{id}
         method: DELETE
+
+GetSales:
+  description: Get a list of sales
+  handler: src/functions/sales_crud/getSales.getSales
+  events:
+    - http:
+        path: /sales
+        method: GET
+
+ReadSale:
+  description: Get a sale by package id
+  handler: src/functions/sales_crud/readSale.readSale
+  events:
+    - http:
+        path: /sales/{id}
+        method: GET
