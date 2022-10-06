@@ -23,6 +23,7 @@ export const readSale = async (event, context, callback) => {
     return errorResponse('Forbidden', 403)
   }
 
-  sale.GMapsUrl = await getWarehouseCoords(sale.warehouseId)
+  const { warehouseId, deliveryAddress, deliveryInstructions } = sale
+  sale.GMapsUrl = await getWarehouseCoords(warehouseId, deliveryAddress, deliveryInstructions)
   return succesfullResponse(sale)
 }

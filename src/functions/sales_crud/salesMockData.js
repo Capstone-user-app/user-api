@@ -68,7 +68,7 @@ const salesMockData = [
     position: '0010202',
     warehouseName: 'Costanera Lippi',
     warehouseId: 1,
-    deliveryAddress: 'Andrés Bello 2425',
+    deliveryAddress: 'Av. Andrés Bello 2425',
     deliveryInstructions: null,
     clientEmail: 'capstone-g4@pinflag.cl',
     clientName: 'Tony',
