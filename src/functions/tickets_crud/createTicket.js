@@ -2,7 +2,7 @@
 import { succesfullResponse, errorResponse } from '../../utils/response_util'
 import { loadORM } from '../../config/sequelize'
 import { getUserEmail } from '../../utils/getUserEmail'
-import { sanitizeBody } from '../../utils/sanitizeBody'
+// import { sanitizeBody } from '../../utils/sanitizeBody'
 
 export const createTicket = async (event) => {
   let userEmail = null
@@ -20,5 +20,14 @@ export const createTicket = async (event) => {
     return succesfullResponse(ticket, 201)
   } catch (error) {
     return errorResponse('Ticket could not be created', 400)
+  }
+}
+
+const sanitizeBody = (body) => {
+  return {
+    title: body.title,
+    description: body.description,
+    publicationDate: new Date(),
+    status: body.status
   }
 }

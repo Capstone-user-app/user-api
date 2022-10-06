@@ -2,7 +2,7 @@
 /* eslint-disable max-lines-per-function */
 import { succesfullResponse, errorResponse } from '../../utils/response_util'
 import { loadORM } from '../../config/sequelize'
-import { sanitizeBody } from '../../utils/sanitizeBody'
+// import { sanitizeBody } from '../../utils/sanitizeBody'
 import { getUserEmail } from '../../utils/getUserEmail'
 
 export const updateTicket = async (event) => {
@@ -31,5 +31,13 @@ export const updateTicket = async (event) => {
     return succesfullResponse(ticket)
   } catch (error) {
     return errorResponse('Ticket could not be updated', 400)
+  }
+}
+
+const sanitizeBody = (body) => {
+  return {
+    title: body.title,
+    description: body.description,
+    status: body.status
   }
 }
