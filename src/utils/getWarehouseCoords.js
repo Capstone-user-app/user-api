@@ -5,16 +5,16 @@ async function getWarehouseCoords (wid) {
   // directly with the warehouse id, but for now this should work
   const url = 'https://company-api.pinflag.cl/api/common/warehouse'
   const warehouses = await urlFetch(url)
-  let warehouse
-  for (let i = 0; i < warehouses.length; i++) {
-    warehouse = warehouses[i]
+  // set up the template for the Google Maps URL
+  const gMapsTemplate = `https://www.google.com/maps/search/?api=1&query=${0}%2C${1}`
+  warehouses.forEach((warehouse) => {
     if (warehouse.id === wid) {
       // iterate through all the warehouses, and return as soon as the first one is found
       // hopelessly inefficient, but it works
-      return `https://www.google.com/maps/search/?api=1&query=${warehouse.coordenaday}%2C${warehouse.coordenadax}`
+      return gMapsTemplate(warehouse.coordenaday, warehouse.coordenadax)
     }
-  }
-  return null
+    return null
+  })
 }
 
 // code "inspired" by:
