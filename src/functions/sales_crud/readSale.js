@@ -3,7 +3,6 @@
 import { succesfullResponse, errorResponse } from '../../utils/response_util'
 import { getUserEmail } from '../../utils/getUserEmail'
 import { salesMockData } from './salesMockData'
-import { getWarehouseCoords } from '../../utils/getWarehouseCoords'
 
 export const readSale = async (event, context, callback) => {
   let userEmail = null
@@ -23,6 +22,5 @@ export const readSale = async (event, context, callback) => {
     return errorResponse('Forbidden', 403)
   }
 
-  sale.GMapsUrl = await getWarehouseCoords(sale.warehouseId)
   return succesfullResponse(sale)
 }
