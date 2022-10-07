@@ -5,6 +5,7 @@ HelloWorld:
     - http:
         path: /hello-world
         method: POST
+        cors: true
 
 CreateTicket:
   description: Create a Ticket
@@ -14,6 +15,7 @@ CreateTicket:
     - http:
         path: /tickets
         method: POST
+        cors: true
 
 UpdateTicket:
   description: Update a ticket
@@ -22,6 +24,7 @@ UpdateTicket:
     - http:
         path: /tickets/{id}
         method: PUT
+        cors: true
 
 GetTickets:
   description: List all tickets 
@@ -30,6 +33,7 @@ GetTickets:
     - http:
         path: /tickets
         method: GET
+        cors: true
 
 ReadTicket:
   description: Get a ticket with ticketID
@@ -38,6 +42,8 @@ ReadTicket:
     - http:
         path: /tickets/{id}
         method: GET
+        cors: true
+
 DeleteTicket:
   description: Delete a ticket by id
   handler: src/functions/tickets_crud/deleteTicket.deleteTicket
@@ -45,6 +51,7 @@ DeleteTicket:
     - http:
         path: /tickets/{id}
         method: DELETE
+        cors: true
 
 GetSales:
   description: Get a list of sales
@@ -53,6 +60,7 @@ GetSales:
     - http:
         path: /sales
         method: GET
+        cors: true
 
 ReadSale:
   description: Get a sale by package id
@@ -61,3 +69,4 @@ ReadSale:
     - http:
         path: /sales/{id}
         method: GET
+        cors: true
