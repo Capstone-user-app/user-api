@@ -21,7 +21,10 @@ provider:
     shouldStartNameWithService: true
     minimumCompressionSize: 128 # compress responses over 128kb
   httpApi:
-    cors: true
+    cors:
+      allowedOrigins:
+       - http://127.0.0.1:3000
+
     authorizers:
       someJwtAuthorizer:
         type: jwt
