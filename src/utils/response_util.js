@@ -8,6 +8,10 @@ export const succesfullResponse = (data, statusCode = 200) => {
 export const errorResponse = (errorMessage, statusCode = 400) => {
   return {
     statusCode,
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Credentials': true,
+    },
     body: JSON.stringify(
       {
         error: errorMessage
