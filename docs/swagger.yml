@@ -4,14 +4,15 @@ info:
   version: '0.1'
 servers:
   - url: https://9shjd4c13a.execute-api.sa-east-1.amazonaws.com/dev/
-security:
-  - bearerAuth: []
+
 paths:
   /tickets:
     post:
       summary: Create a ticket
       tags: 
         - Tickets
+      security:
+        BearerAuth: []
       requestBody:
         description: Data for create a ticket
         required: true
@@ -30,6 +31,8 @@ paths:
       summary: Get all tickets
       tags:
         - Tickets
+      security:
+        BearerAuth: []
       responses:
         '200':
           description: List of all tickets
@@ -40,6 +43,14 @@ paths:
       summary: Get a ticket by id
       tags:
         - Tickets
+      security:
+        BearerAuth: []
+      parameters:
+        - in: path
+          name: ticketID
+          schema: 
+            type: string
+            format: uuid
       responses:
         '200':
           description: Get the requested ticket
@@ -53,11 +64,14 @@ paths:
       summary: Update a ticket
       tags:
         - Tickets
+      security:
+        BearerAuth: []
       parameters:
         - in: path
           name: ticketId
           schema:
-            type: integer
+            type: string
+            format: uuid
       
       responses: 
         '200':
@@ -75,11 +89,14 @@ paths:
       summary: Delete a ticket
       tags:
         - Tickets
+      security:
+        BearerAuth: []
       parameters:
         - in: path
           name: ticketId
           schema:
-            type: integer
+            type: string
+            format: uuid
       responses:
         '200':
           description: Ticket deleted
@@ -94,6 +111,8 @@ paths:
       summary: Get a list of sales
       tags:
         - Sales
+      security:
+        BearerAuth: []
         
       responses:
         '200':
@@ -105,20 +124,20 @@ paths:
       summary: Get a sale by id
       tags:
         - Sales
+      security:
+        BearerAuth: []
       parameters:
         - in: path
           name: saleId
           schema:
-            type: integer
+            type: string
+            format: uuid
 
 components:
   schemas:
     Ticket:
       type: object
       properties:
-        userEmail: 
-          type: string
-          format: email
         title:
           type: string
         description:
@@ -130,7 +149,7 @@ components:
           type: integer
       
   securitySchemes: 
-    bearerAuth:
+    BearerAuth:
       type: http
       scheme: bearer
       bearerFormat: JWT
