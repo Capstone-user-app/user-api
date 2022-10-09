@@ -49,8 +49,7 @@ paths:
         - in: path
           name: ticketID
           schema: 
-            type: string
-            format: uuid
+            type: integer
       responses:
         '200':
           description: Get the requested ticket
@@ -70,9 +69,7 @@ paths:
         - in: path
           name: ticketId
           schema:
-            type: string
-            format: uuid
-      
+            type: integer
       responses: 
         '200':
           description: Ticket updated
@@ -95,8 +92,7 @@ paths:
         - in: path
           name: ticketId
           schema:
-            type: string
-            format: uuid
+            type: integer
       responses:
         '200':
           description: Ticket deleted
